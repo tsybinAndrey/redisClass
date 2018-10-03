@@ -1,0 +1,18 @@
+{
+  "name": "redis-class",
+  "version": "0.0.1",
+  "description": "Redis class with async functions constructor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "redis",
+    "node.js"
+  ],
+  "author": "Tcybin Andrew",
+  "license": "ISC",
+  "dependencies": {
+    "redis": "^2.8.0"
+  }
+}
