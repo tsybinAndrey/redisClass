@@ -3,7 +3,24 @@ const { promisify } = require('util');
 
 class RedisClass {
   constructor(config) {
-    this.connection = redis.createClient(config);
+    this.connection = redis.createClient({
+      host: config.host,
+      port: config.port,
+      password: config.password,
+      db: config.db,
+      retry_strategy: (options) => {
+        if (options.error && options.error.code === 'ECONNREFUSED') {
+          return new Error('The server refused the connection')
+        }
+        if (options.total_retry_time > config.reconnectTime || 1000 * 60 * 60 * 24 * 2) {
+          return new Error('Retry time exhausted')
+        }
+        if (options.attempt > config.reconnectTries || Number.MAX_VALUE) {
+          return undefined
+        }
+        return config.reconnectInterval || 5000
+      },
+    });
 
     this.quitAsync = promisify(this.connection.quit).bind(this.connection);
 
