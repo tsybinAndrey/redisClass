@@ -1,6 +1,6 @@
 {
   "name": "redis-class",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Redis class with async functions constructor",
   "main": "index.js",
   "scripts": {
